@@ -108,6 +108,15 @@ on={}""".format(self._chord, self._root, self._quality, self._appended, self._on
 
         return self._quality.get_components(root=self._root, visible=visible)
 
+    def triad(self, visible=True):
+        """ Return the fundamental triad notes of chord
+
+        :param bool visible: returns the name of notes if True else list of int
+        :rtype: list[(str or int)]
+        :return component notes of the triad
+        """
+        return self._quality.get_triad(root=self._root, visible=visible)
+
     def _parse(self, chord):
         """ parse a chord
 

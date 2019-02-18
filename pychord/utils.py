@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from .constants import NOTE_VAL_DICT, SCALE_VAL_DICT
+from .constants import NOTE_VAL_DICT, SCALE_VAL_DICT, INTERVAL_DICT
 
 
 def note_to_val(note):
@@ -18,6 +18,20 @@ def note_to_val(note):
         raise ValueError("Unknown note {}".format(note))
     return NOTE_VAL_DICT[note]
 
+def interval_to_val(interval, root):
+    """ Convert interval to int
+
+    >>> interval_to_val("4")
+    5
+    >>> interval_to_val("5+")
+    8
+
+    :type slashnote: str
+    :rtype: int
+    """
+    if interval not in INTERVAL_DICT:
+        raise ValueError("Unknown slashnote note (interval) {}".format(interval))
+    return (note_to_val(root) + INTERVAL_DICT[interval]) % 12
 
 def val_to_note(val, scale="C"):
     """ Convert int to note

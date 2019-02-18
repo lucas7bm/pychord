@@ -2,7 +2,7 @@
 
 from .quality import Quality
 from .constants import QUALITY_DICT
-from .utils import NOTE_VAL_DICT
+from .utils import NOTE_VAL_DICT, INTERVAL_DICT
 
 
 def parse(chord):
@@ -24,6 +24,7 @@ def parse(chord):
         on = rest[on_chord_idx + 1:]
         rest = rest[:on_chord_idx]
         check_note(on, chord)
+
     else:
         on = None
     if rest in QUALITY_DICT:
@@ -42,6 +43,9 @@ def check_note(note, chord):
     :param str chord: the chord which includes the note
     :return bool:
     """
-    if note not in NOTE_VAL_DICT:
+    if (note not in NOTE_VAL_DICT and note not in INTERVAL_DICT):
         raise ValueError("Invalid chord {}: Unknown note {}".format(chord, note))
     return True
+
+#def convert_numeric_on(note, chord):
+

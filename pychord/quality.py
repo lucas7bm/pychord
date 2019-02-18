@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from .constants import QUALITY_DICT
-from .utils import note_to_val, val_to_note
-
+from .utils import note_to_val, val_to_note, interval_to_val
+import copy
 
 class Quality(object):
     """ Chord quality
@@ -17,7 +17,7 @@ class Quality(object):
         if quality not in QUALITY_DICT:
             raise ValueError("unknown quality {}".format(quality))
         self._quality = quality
-        self.components = QUALITY_DICT[quality]
+        self.components = copy.deepcopy(QUALITY_DICT[quality])
 
     def __unicode__(self):
         return self._quality
@@ -54,6 +54,22 @@ class Quality(object):
 
         return components
 
+    def get_triad(self, root='C', visible=False):
+        """ Get the triad of the chord
+
+        :param str root: the root note of the chord
+        :param bool visible: returns the name of notes if True
+        :rtype: list[(str or int)]
+        :return triad components of the chord
+        """
+        root_val = note_to_val(root)
+        triad = [v + root_val for v in copy.deepcopy(QUALITY_DICT[self.quality])[:3]]
+
+        if visible:
+            triad = [val_to_note(c, scale=root) for c in triad]
+
+        return triad
+
     def append_on_chord(self, on_chord, root):
         """ Append on chord
 
@@ -65,7 +81,10 @@ class Quality(object):
         :param str root: root note of the chord
         """
         root_val = note_to_val(root)
-        on_chord_val = note_to_val(on_chord) - root_val
+        try:
+            on_chord_val = note_to_val(on_chord) - root_val
+        except:
+            on_chord_val = interval_to_val(on_chord, root) - root_val
 
         list_ = list(self.components)
         for idx, val in enumerate(list_):
