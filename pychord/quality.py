@@ -38,6 +38,12 @@ class Quality(object):
         """ Get name of quality """
         return self._quality
 
+    def is_major(self):
+        if (copy.deepcopy(QUALITY_DICT[self.quality])[1] == 4):
+            return True
+        else:
+            return False
+
     def get_components(self, root='C', visible=False):
         """ Get components of chord quality
 
@@ -47,7 +53,7 @@ class Quality(object):
         :return components of chord quality
         """
         root_val = note_to_val(root)
-        components = [v + root_val for v in self.components]
+        components = [(v + root_val) % 12 for v in self.components]
 
         if visible:
             components = [val_to_note(c, scale=root) for c in components]

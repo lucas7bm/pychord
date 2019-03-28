@@ -1,10 +1,18 @@
-MAJOR_SCALE = {
+MAJOR_SCALE = [
     0, 2, 4, 5, 7, 9, 11
-}
+]
 
-MINOR_SCALE = {
+MINOR_SCALE = [
     0, 2, 3, 5, 7, 8, 10
-}
+]
+
+CIRCLE_MAJ = [
+    "C", "G", "D", "A", "E", "B", "Gb", "Db", "Ab", "Eb", "Bb", "F"
+]
+
+CIRCLE_MIN = [
+    "Am", "Em", "Bm", "Gbm", "Dbm", "Abm", "Ebm", "Bbm", "Fm", "Cm", "Gm", "Dm"
+]
 
 NOTE_VAL_DICT = {
     'Ab': 8,
@@ -25,6 +33,23 @@ NOTE_VAL_DICT = {
     'Gb': 6,
     'G': 7,
     'G#': 8,
+}
+
+HARMONIC_FIELDS = {
+    0: "C",
+    0: "Cm",
+    0: "D",
+    0: "Dm",
+    0: "E",
+    0: "Em",
+    0: "F",
+    0: "Fm",
+    0: "G",
+    0: "Gm",
+    0: "A",
+    0: "Am",
+    0: "B",
+    0: "Bm",
 }
 
 VAL_NOTE_DICT = {
